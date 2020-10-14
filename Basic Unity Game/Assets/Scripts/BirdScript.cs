@@ -18,6 +18,11 @@ public class BirdScript : MonoBehaviour
 
     private void Update()
     {
+        var line = GetComponent<LineRenderer>();
+        line.SetPosition(0, transform.position);
+        line.SetPosition(1, _startingPosition);
+        
+
         if (_birdWasLaunched && GetComponent<Rigidbody2D>().velocity.magnitude <= 0.1f)
         {
             _timeSittingAround += Time.deltaTime;
@@ -37,6 +42,9 @@ public class BirdScript : MonoBehaviour
 
     private void OnMouseDown()
     {
+        var line = GetComponent<LineRenderer>();
+        line.enabled = true;
+
         var spriteRenderer = GetComponent<SpriteRenderer>();
 
         spriteRenderer.color = Color.red;
@@ -44,6 +52,9 @@ public class BirdScript : MonoBehaviour
 
     public void OnMouseUp()
     {
+        var line = GetComponent<LineRenderer>();
+        line.enabled = false;
+
         var directionToInitialPosition = _startingPosition - transform.position;
         var spriteRenderer = GetComponent<SpriteRenderer>();
         var ridgidBody = GetComponent<Rigidbody2D>();
